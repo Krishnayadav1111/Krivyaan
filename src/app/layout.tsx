@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter, Plus_Jakarta_Sans } from 'next/font/google'
 import './globals.css'
 import { siteConfig } from '@/constants/navigation'
+import Script from 'next/script'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -97,6 +98,23 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${plusJakarta.variable} font-sans antialiased bg-white text-slate-900`}
       >
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18298702218"
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'AW-18298702218');
+            `,
+          }}
+        />
         {children}
       </body>
     </html>

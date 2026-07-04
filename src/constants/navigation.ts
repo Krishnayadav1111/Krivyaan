@@ -50,7 +50,7 @@ export const siteConfig = {
   tagline: 'Websites That Turn Visitors Into Customers',
   description:
     'We build fast, modern business websites that help companies across India, USA, UK, Australia, and Canada grow online and attract more clients.',
-  email: 'hello@krivyaan.com',
+  email: 'zenix.krishna@gmail.com',
   phone: '+1 (555) 234-5678',
   address: 'Remote-first · Serving India, USA, UK, AU & CA',
   url: 'https://krivyaan.com',
