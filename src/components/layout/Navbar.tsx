@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
+import { useRouter, usePathname } from 'next/navigation'
 import Image from 'next/image'
 import { Button } from '@/components/ui/Button'
 import { navLinks } from '@/constants/navigation'
@@ -12,6 +13,8 @@ import { useScrollDirection } from '@/hooks/useScrollDirection'
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const { scrolled } = useScrollDirection()
+  const router = useRouter()
+  const pathname = usePathname()
 
   // Close mobile menu on resize
   useEffect(() => {
@@ -30,10 +33,24 @@ export function Navbar() {
 
   const handleNavClick = (href: string) => {
     setMobileOpen(false)
-    const el = document.querySelector(href)
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    if (href.startsWith('/#')) {
+      const hash = href.substring(1)
+      const el = document.querySelector(hash)
+      if (el && pathname === '/') {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        window.history.pushState({}, '', href)
+        return
+      }
+    } else if (href.startsWith('#')) {
+      const el = document.querySelector(href)
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        window.history.pushState({}, '', `/${href}`)
+        return
+      }
     }
+    
+    router.push(href)
   }
 
   return (
@@ -53,7 +70,7 @@ export function Navbar() {
           <nav className="flex h-16 md:h-18 items-center justify-between gap-4">
             {/* Logo */}
             <button
-              onClick={() => handleNavClick('#home')}
+              onClick={() => handleNavClick('/#home')}
               className="flex items-center flex-shrink-0 group"
               aria-label="Krivyaan home"
             >
@@ -86,7 +103,7 @@ export function Navbar() {
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => handleNavClick('#enquiry')}
+                onClick={() => handleNavClick('/#enquiry')}
                 className="text-slate-600"
               >
                 Sign In
@@ -94,7 +111,7 @@ export function Navbar() {
               <Button
                 variant="primary"
                 size="sm"
-                onClick={() => handleNavClick('#enquiry')}
+                onClick={() => handleNavClick('/#enquiry')}
                 id="navbar-cta"
               >
                 Get Free Consultation
@@ -148,7 +165,7 @@ export function Navbar() {
                 <Button
                   variant="secondary"
                   size="lg"
-                  onClick={() => handleNavClick('#enquiry')}
+                  onClick={() => handleNavClick('/contact')}
                   className="w-full"
                 >
                   Contact Us
@@ -156,7 +173,7 @@ export function Navbar() {
                 <Button
                   variant="primary"
                   size="lg"
-                  onClick={() => handleNavClick('#enquiry')}
+                  onClick={() => handleNavClick('/#enquiry')}
                   className="w-full"
                   id="mobile-cta"
                 >

@@ -2,12 +2,32 @@
 
 import Image from 'next/image'
 import { Mail, Phone, MapPin, Twitter, Linkedin, Instagram, Github } from 'lucide-react'
+import { useRouter, usePathname } from 'next/navigation'
 import { footerQuickLinks, footerServices, siteConfig } from '@/constants/navigation'
 
 export function Footer() {
+  const router = useRouter()
+  const pathname = usePathname()
+
   const handleNavClick = (href: string) => {
-    const el = document.querySelector(href)
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    if (href.startsWith('/#')) {
+      const hash = href.substring(1)
+      const el = document.querySelector(hash)
+      if (el && pathname === '/') {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        window.history.pushState({}, '', href)
+        return
+      }
+    } else if (href.startsWith('#')) {
+      const el = document.querySelector(href)
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        window.history.pushState({}, '', `/${href}`)
+        return
+      }
+    }
+    
+    router.push(href)
   }
 
   const year = new Date().getFullYear()
@@ -20,7 +40,7 @@ export function Footer() {
           {/* Brand column */}
           <div className="lg:col-span-1">
             <button
-              onClick={() => handleNavClick('#home')}
+              onClick={() => handleNavClick('/#home')}
               className="flex items-center mb-4 group"
               aria-label="Krivyaan home"
             >
@@ -83,7 +103,7 @@ export function Footer() {
               {footerServices.map((service) => (
                 <li key={service}>
                   <button
-                    onClick={() => handleNavClick('#services')}
+                    onClick={() => handleNavClick('/#services')}
                     className="text-sm text-slate-400 hover:text-white transition-colors text-left"
                   >
                     {service}

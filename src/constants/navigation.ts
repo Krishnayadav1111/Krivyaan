@@ -1,12 +1,12 @@
 import type { NavLink, SocialLink } from '@/types'
 
 export const navLinks: NavLink[] = [
-  { label: 'Home', href: '#home' },
-  { label: 'Services', href: '#services' },
-  { label: 'Portfolio', href: '#portfolio' },
-  { label: 'Pricing', href: '#pricing' },
-  { label: 'About', href: '#why-us' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/#services' },
+  { label: 'Portfolio', href: '/#portfolio' },
+  { label: 'Pricing', href: '/#pricing' },
+  { label: 'About', href: '/#why-us' },
+  { label: 'Contact', href: '/contact' },
 ]
 
 export const socialLinks: SocialLink[] = [
@@ -26,12 +26,12 @@ export const footerServices = [
 ]
 
 export const footerQuickLinks = [
-  { label: 'Home', href: '#home' },
-  { label: 'Services', href: '#services' },
-  { label: 'Portfolio', href: '#portfolio' },
-  { label: 'Pricing', href: '#pricing' },
-  { label: 'FAQ', href: '#faq' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/#services' },
+  { label: 'Portfolio', href: '/#portfolio' },
+  { label: 'Pricing', href: '/#pricing' },
+  { label: 'FAQ', href: '/#faq' },
+  { label: 'Contact', href: '/contact' },
 ]
 
 export const trustedCompanies = [
